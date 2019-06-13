@@ -126,6 +126,7 @@ public class NewGameController implements Observer, Initializable, IView {
         if (end == true) {
            // a.play();
         }
+        MyViewController.writeToLog("user generated a maze", "info");
         solDisplayer.cleansol();
         lock = false;
 
@@ -138,6 +139,7 @@ public class NewGameController implements Observer, Initializable, IView {
             FileOutputStream out = new FileOutputStream("resources/config.properties");
             if(maze == null){
                 showAlert("please enter maze difficulty");
+                MyViewController.writeToLog("user didn't enter ", "alert");
                 return;
             }
             if (maze != null) {
@@ -231,6 +233,8 @@ public class NewGameController implements Observer, Initializable, IView {
                     viewModel.solveMaze();
                     solDisplayer.setMaze(viewModel.getMaze());
                     solDisplayer.setSol(viewModel.getsolution());
+                    MyViewController.writeToLog("user solved a maze", "info");
+
                 }
 
             } catch (FileNotFoundException e) {
@@ -263,12 +267,14 @@ public class NewGameController implements Observer, Initializable, IView {
     public void New(ActionEvent event) throws IOException {
         MyViewController MVC = new MyViewController();
         MVC.getNewGameView(event);
+        MyViewController.writeToLog("user started a new maze", "info");
         finish = false;
     }
 
     public void KeyPressed(KeyEvent keyEvent) throws IOException {
         if (!finish) {
             viewModel.moveCharacter(keyEvent.getCode());
+            MyViewController.writeToLog("user moved the characted via" +keyEvent.getCode().toString(), "info");
             keyEvent.consume();
         }
         if (viewModel.getCharacterPositionRow() == viewModel.getEndPositionRow() && viewModel.getCharacterPositionColumn() == viewModel.getEndPositionColumn() && lock == false&&finish==false) {
@@ -281,10 +287,12 @@ public class NewGameController implements Observer, Initializable, IView {
         if(B_Stop.getText().equals("pause music")){
             MyViewController.getMediaPlayer().stop();
             B_Stop.setText("play music");
+            MyViewController.writeToLog("user stopped the music", "info");
         }
         else{
             MyViewController.getMediaPlayer().play();
             B_Stop.setText("pause music");
+            MyViewController.writeToLog("user started the music", "info");
         }
     }
 
@@ -332,6 +340,8 @@ public class NewGameController implements Observer, Initializable, IView {
 
         MyViewController MVC = new MyViewController();
         MVC.help(event);
+        MyViewController.writeToLog("user used the help window", "info");
+
     }
 
     public void about(ActionEvent event) throws IOException{
@@ -351,6 +361,7 @@ public class NewGameController implements Observer, Initializable, IView {
 //       view.setResizeEvent(scene);
         view.setViewModel(viewModel);
         //viewModel.addObserver(view);
+        MyViewController.writeToLog("user used the about window", "info");
 
         window.show();
     }
@@ -372,6 +383,9 @@ public class NewGameController implements Observer, Initializable, IView {
         if (save != null) {
             viewModel.save(save);
         }
+
+        MyViewController.writeToLog("user saved an existing game", "info");
+
     }
 
     public void Load(ActionEvent event) throws IOException {
@@ -382,6 +396,8 @@ public class NewGameController implements Observer, Initializable, IView {
 
             displayMaze(viewModel.getMaze());
         }
+        MyViewController.writeToLog("user loaded an existing game", "info");
+
     }
 
     protected File GetLoadFile() {
@@ -400,6 +416,7 @@ public class NewGameController implements Observer, Initializable, IView {
     public void Exit(ActionEvent event) throws IOException {
         viewModel.Exit();
         Platform.exit();
+        MyViewController.writeToLog("user quit the game", "info");
         System.exit(0);
 
     }
@@ -413,6 +430,7 @@ public class NewGameController implements Observer, Initializable, IView {
     public void preferences(ActionEvent event) throws IOException{
         MyViewController MVC = new MyViewController();
         MVC.preferences(event);
+        MyViewController.writeToLog("user used the preferences window", "info");
 
     }
 
@@ -479,6 +497,7 @@ public class NewGameController implements Observer, Initializable, IView {
         Stage window = new Stage();
         window.setScene(scene);
         window.setTitle("congratulations you found princess peach!!!!!");
+        MyViewController.writeToLog("user finished the game successfully", "info");
         window.show();
     }
 

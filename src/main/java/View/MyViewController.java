@@ -31,7 +31,14 @@ public class MyViewController implements IView {
             LOG.info(str);
         }
         if(type.equals("alert")){
-            LOG.;
+            LOG.error(str);
+
+        }
+        if(type.equals("fatal")){
+            LOG.fatal(str);
+        }
+        if(type.equals("warning")){
+            LOG.warn(str);
         }
     }
 

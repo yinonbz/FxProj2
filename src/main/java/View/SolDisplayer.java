@@ -36,9 +36,10 @@ public class SolDisplayer extends Canvas {
     }
 
     public void cleansol() {
+
+        arrsol = new ArrayList<>();
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
-        arrsol = new ArrayList<>();
     }
 
     public void presentSol() {
