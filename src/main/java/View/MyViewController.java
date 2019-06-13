@@ -23,7 +23,17 @@ import sun.rmi.runtime.Log;
 
 public class MyViewController implements IView {
 
+
     private static final Logger LOG = LogManager.getLogger(); //Log4j2
+
+    public static void writeToLog(String str,String type) {
+        if(type.equals("info")){
+            LOG.info(str);
+        }
+        if(type.equals("alert")){
+            LOG.;
+        }
+    }
 
     private static String ssound = "./resources/maritheme.mp3";
     private static Media sound = new Media(new File(ssound).toURI().toString());
@@ -161,6 +171,8 @@ public class MyViewController implements IView {
 
         preferencesController view = fxmlLoader.getController();
         view.setButtonsName();
+
+        LOG.info("The user watched the preferences");
 
         window.show();
     }

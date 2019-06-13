@@ -128,6 +128,7 @@ public class NewGameController implements Observer, Initializable, IView {
         }
         solDisplayer.cleansol();
         lock = false;
+
 //        screen.setText("");
         String maze = combo.getValue();
 
